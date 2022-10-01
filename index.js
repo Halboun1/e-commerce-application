@@ -1,7 +1,10 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
 
 const app = express();
+
+app.use(bodyParser.urlencoded({extended: true}));
 
 
 app.get('/',(req,res) =>{
@@ -18,7 +21,7 @@ app.get('/',(req,res) =>{
 });
 
 
-const bodyParser = (req,res,next) => {
+/*const bodyParser = (req,res,next) => {
     if(req.method === 'POST'){
         req.on('data',data=>{
             const parsed = data.toString('utf8').split('&');
@@ -33,10 +36,10 @@ const bodyParser = (req,res,next) => {
     }else{
         next();
     }
-};
+};*/
 
 
-app.post('/',bodyParser, (req,res) => {
+app.post('/', (req,res) => {
     //get access to email, password, passwordConfirmation.
     /*req.on('data',data=>{
         const parsed = data.toString('utf8').split('&');
@@ -47,15 +50,7 @@ app.post('/',bodyParser, (req,res) => {
         }
         console.log(formData);
     });*/
-
-
-    //another built in function that does the same thing as above.
-
-
-
-
     console.log(req.body);
-
 
     res.send('Account Created');
 });
